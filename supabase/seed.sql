@@ -1,0 +1,3 @@
+-- Seed data for local Supabase development.
+-- Populated by `supabase db reset` / `supabase start` when db.seed.enabled = true.
+-- No real personal data is used.

@@ -1,11 +1,5 @@
 import type { Metadata } from "next";
 
-export type LayoutProps<Segment extends string = string> = {
-  children: React.ReactNode;
-  params: Promise<{ [key in Segment]: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-};
-
 export const metadata: Metadata = {
   title: "Virtual Workplace Internship Platform",
   description: "Simulated remote workplace for digital-skills trainees.",

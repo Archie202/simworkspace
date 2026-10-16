@@ -1,0 +1,94 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type check
+        run: npm run typecheck
+
+  db-tests:
+    runs-on: ubuntu-latest
+    services:
+      # Supabase local stack needs Docker; use the CLI's own containers.
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Supabase CLI
+        run: npm install @supabase/cli --save-dev
+
+      - name: Start local Supabase
+        run: npx supabase start
+
+      - name: Run database tests
+        run: npx supabase test db
+
+      - name: Stop local Supabase
+        if: always()
+        run: npx supabase stop
+
+  bundle-size:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build for production
+        run: npm run build
+
+      - name: Check bundle-size budget
+        run: |
+          # Budget from AGENTS.md: under 150 KB of JavaScript per route (compressed).
+          # Check each route's entry chunk in the production build.
+          MAX_KB=150
+          FAIL=0
+          for f in .next/static/chunks/*.js; do
+            size_kb=$(stat -c %s "$f")
+            size_kb=$((size_kb / 1024))
+            if [ "$size_kb" -gt "$MAX_KB" ]; then
+              echo "OVER BUDGET: $(basename "$f") is ${size_kb}KB (> ${MAX_KB}KB)"
+              FAIL=1
+            fi
+          done
+          if [ "$FAIL" -ne 0 ]; then
+            echo "Bundle-size budget exceeded (${MAX_KB}KB per route)."
+            exit 1
+          fi
+          echo "All route chunks within the ${MAX_KB}KB budget."
