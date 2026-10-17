@@ -12,8 +12,9 @@ create schema if not exists private;
 alter schema private owner to postgres;
 
 -- Fixed search_path for all helper functions.
--- Only system schemas and `private` are included; never `public`.
-alter database postgres set search_path to private, pg_catalog;
+-- `private` first (own schema), then `public` (tables and enums),
+-- then `pg_catalog` (system).
+alter database postgres set search_path to private, public, pg_catalog;
 
 -- ---------------------------------------------------------------------------
 -- current_org_id()
@@ -26,7 +27,7 @@ returns uuid
 language plpgsql
 stable
 security definer
-set search_path = private, pg_catalog
+set search_path = private, public, pg_catalog
 as $$
 declare
   result uuid;
@@ -43,26 +44,26 @@ end;
 $$;
 
 -- ---------------------------------------------------------------------------
--- has_role(role public.app_role)
+-- has_role(role_param public.app_role)
 -- Whether the caller holds the given organisation-level role.
 -- ---------------------------------------------------------------------------
 
-create function private.has_role(role public.app_role)
+create function private.has_role(role_param public.app_role)
 returns boolean
 language plpgsql
 stable
 security definer
-set search_path = private, pg_catalog
+set search_path = private, public, pg_catalog
 as $$
 declare
   result boolean;
 begin
   select exists (
     select 1
-    from profiles p
-    join user_roles ur on ur.user_id = p.id
+    from public.profiles p
+    join public.user_roles ur on ur.user_id = p.id
     where p.id = auth.uid()
-      and ur.role = role
+      and ur.role = role_param
   )
   into result;
 
@@ -80,7 +81,7 @@ returns boolean
 language plpgsql
 stable
 security definer
-set search_path = private, pg_catalog
+set search_path = private, public, pg_catalog
 as $$
 declare
   result boolean;
@@ -110,7 +111,7 @@ returns boolean
 language plpgsql
 stable
 security definer
-set search_path = private, pg_catalog
+set search_path = private, public, pg_catalog
 as $$
 declare
   result boolean;
@@ -140,7 +141,7 @@ returns public.company_function
 language plpgsql
 stable
 security definer
-set search_path = private, pg_catalog
+set search_path = private, public, pg_catalog
 as $$
 declare
   result public.company_function;
@@ -169,7 +170,7 @@ returns boolean
 language plpgsql
 stable
 security definer
-set search_path = private, pg_catalog
+set search_path = private, public, pg_catalog
 as $$
 declare
   dob date;
@@ -201,7 +202,7 @@ returns boolean
 language plpgsql
 stable
 security definer
-set search_path = private, pg_catalog
+set search_path = private, public, pg_catalog
 as $$
 declare
   result boolean;
@@ -230,7 +231,7 @@ returns boolean
 language plpgsql
 stable
 security definer
-set search_path = private, pg_catalog
+set search_path = private, public, pg_catalog
 as $$
 declare
   result boolean;
@@ -259,7 +260,7 @@ returns boolean
 language plpgsql
 stable
 security definer
-set search_path = private, pg_catalog
+set search_path = private, public, pg_catalog
 as $$
 declare
   result boolean;

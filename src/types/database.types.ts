@@ -153,14 +153,14 @@ isOneToOne: false
                   ]
                 },"guardian_links": {
                   Row: {
-                    "created_at": string,"guardian_email": string,"guardian_name": string,"guardian_profile_id": string | null,"id": string,"intern_id": string,"relationship": string,"status": string,"verified_at": string | null,"verified_by": string | null
+                    "created_at": string,"guardian_email": string,"guardian_name": string,"guardian_profile_id": string | null,"id": string,"intern_id": string,"organization_id": string,"relationship": string,"status": string,"verified_at": string | null,"verified_by": string | null
                   }
                   ComputedFields: never
                   Insert: {
-                    "created_at"?: string,"guardian_email": string,"guardian_name": string,"guardian_profile_id"?: string | null,"id"?: string,"intern_id": string,"relationship": string,"status": string,"verified_at"?: string | null,"verified_by"?: string | null
+                    "created_at"?: string,"guardian_email": string,"guardian_name": string,"guardian_profile_id"?: string | null,"id"?: string,"intern_id": string,"organization_id": string,"relationship": string,"status": string,"verified_at"?: string | null,"verified_by"?: string | null
                   }
                   Update: {
-                    "created_at"?: string,"guardian_email"?: string,"guardian_name"?: string,"guardian_profile_id"?: string | null,"id"?: string,"intern_id"?: string,"relationship"?: string,"status"?: string,"verified_at"?: string | null,"verified_by"?: string | null
+                    "created_at"?: string,"guardian_email"?: string,"guardian_name"?: string,"guardian_profile_id"?: string | null,"id"?: string,"intern_id"?: string,"organization_id"?: string,"relationship"?: string,"status"?: string,"verified_at"?: string | null,"verified_by"?: string | null
                   }
                   Relationships: [
                     {
