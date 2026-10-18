@@ -11,6 +11,7 @@ const ROUTE_ACCESS: Record<string, string[]> = {
   // All authenticated users
   "/dashboard": ["intern", "hr", "manager", "trainer", "school_admin", "platform_admin"],
   "/jobs": ["intern", "hr", "manager", "trainer", "school_admin", "platform_admin"],
+  "/apply": ["intern", "hr", "manager", "trainer", "school_admin", "platform_admin"],
   "/tasks": ["intern", "hr", "manager", "trainer", "school_admin", "platform_admin"],
   "/chat": ["intern", "hr", "manager", "trainer", "school_admin", "platform_admin"],
   "/meetings": ["intern", "hr", "manager", "trainer", "school_admin", "platform_admin"],

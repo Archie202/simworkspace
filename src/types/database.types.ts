@@ -23,7 +23,63 @@ export type Database = {
           }
         },"public": {
           Tables: {
-            "audit_log": {
+            "applications": {
+                  Row: {
+                    "applicant_id": string,"attempt_number": number,"cohort_id": string,"company_id": string,"cover_note": string | null,"created_at": string,"cv_path": string,"decided_at": string | null,"decided_by": string | null,"feedback_to_applicant": string | null,"id": string,"job_posting_id": string,"organization_id": string,"overridden_by": string | null,"override_reason": string | null,"screening_notes": string | null,"screening_score": number | null,"status": Database["public"]['Enums']["application_status"],"updated_at": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "applicant_id": string,"attempt_number"?: number,"cohort_id": string,"company_id": string,"cover_note"?: string | null,"created_at"?: string,"cv_path": string,"decided_at"?: string | null,"decided_by"?: string | null,"feedback_to_applicant"?: string | null,"id"?: string,"job_posting_id": string,"organization_id": string,"overridden_by"?: string | null,"override_reason"?: string | null,"screening_notes"?: string | null,"screening_score"?: number | null,"status"?: Database["public"]['Enums']["application_status"],"updated_at"?: string
+                  }
+                  Update: {
+                    "applicant_id"?: string,"attempt_number"?: number,"cohort_id"?: string,"company_id"?: string,"cover_note"?: string | null,"created_at"?: string,"cv_path"?: string,"decided_at"?: string | null,"decided_by"?: string | null,"feedback_to_applicant"?: string | null,"id"?: string,"job_posting_id"?: string,"organization_id"?: string,"overridden_by"?: string | null,"override_reason"?: string | null,"screening_notes"?: string | null,"screening_score"?: number | null,"status"?: Database["public"]['Enums']["application_status"],"updated_at"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "applications_applicant_id_fkey"
+      columns: ["applicant_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "applications_cohort_id_fkey"
+      columns: ["cohort_id"]
+isOneToOne: false
+      referencedRelation: "cohorts"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "applications_company_id_fkey"
+      columns: ["company_id"]
+isOneToOne: false
+      referencedRelation: "companies"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "applications_decided_by_fkey"
+      columns: ["decided_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "applications_job_posting_id_fkey"
+      columns: ["job_posting_id"]
+isOneToOne: false
+      referencedRelation: "job_postings"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "applications_organization_id_fkey"
+      columns: ["organization_id"]
+isOneToOne: false
+      referencedRelation: "organizations"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "applications_overridden_by_fkey"
+      columns: ["overridden_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"audit_log": {
                   Row: {
                     "action": string,"actor_id": string | null,"created_at": string,"details": Json | null,"id": number,"organization_id": string | null,"record_id": string | null,"table_name": string | null
                   }
@@ -354,7 +410,7 @@ isOneToOne: false
             [_ in never]: never
           }
           Enums: {
-            "account_status": "invited"|"pending_consent"|"active"|"suspended"|"left","app_role": "platform_admin"|"school_admin"|"trainer"|"employer"|"guardian"|"intern","cohort_status": "draft"|"hiring"|"active"|"completed","company_function": "intern"|"hr"|"manager","consent_kind": "guardian_consent"|"code_of_conduct"|"privacy_notice"|"record_sharing","posting_status": "draft"|"open"|"filled"|"closed","track": "software_development"|"data_analytics"|"program_management"|"hr"
+            "account_status": "invited"|"pending_consent"|"active"|"suspended"|"left","app_role": "platform_admin"|"school_admin"|"trainer"|"employer"|"guardian"|"intern","application_status": "submitted"|"screening"|"interview"|"offered"|"accepted"|"rejected"|"withdrawn","cohort_status": "draft"|"hiring"|"active"|"completed","company_function": "intern"|"hr"|"manager","consent_kind": "guardian_consent"|"code_of_conduct"|"privacy_notice"|"record_sharing","posting_status": "draft"|"open"|"filled"|"closed","track": "software_development"|"data_analytics"|"program_management"|"hr"
           }
           CompositeTypes: {
             [_ in never]: never
@@ -474,7 +530,7 @@ export const Constants = {
           }
         },"public": {
           Enums: {
-            "account_status": ["invited", "pending_consent", "active", "suspended", "left"],"app_role": ["platform_admin", "school_admin", "trainer", "employer", "guardian", "intern"],"cohort_status": ["draft", "hiring", "active", "completed"],"company_function": ["intern", "hr", "manager"],"consent_kind": ["guardian_consent", "code_of_conduct", "privacy_notice", "record_sharing"],"posting_status": ["draft", "open", "filled", "closed"],"track": ["software_development", "data_analytics", "program_management", "hr"]
+            "account_status": ["invited", "pending_consent", "active", "suspended", "left"],"app_role": ["platform_admin", "school_admin", "trainer", "employer", "guardian", "intern"],"application_status": ["submitted", "screening", "interview", "offered", "accepted", "rejected", "withdrawn"],"cohort_status": ["draft", "hiring", "active", "completed"],"company_function": ["intern", "hr", "manager"],"consent_kind": ["guardian_consent", "code_of_conduct", "privacy_notice", "record_sharing"],"posting_status": ["draft", "open", "filled", "closed"],"track": ["software_development", "data_analytics", "program_management", "hr"]
           }
         }
 } as const
