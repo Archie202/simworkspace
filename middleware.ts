@@ -29,6 +29,7 @@ const ROUTE_ACCESS: Record<string, string[]> = {
   "/trainer/cohorts": ["trainer", "school_admin", "platform_admin"],
   "/trainer/companies": ["trainer", "school_admin", "platform_admin"],
   "/trainer/invite": ["trainer", "school_admin", "platform_admin"],
+  "/trainer/consent": ["trainer", "school_admin", "platform_admin"],
 
   // School admin and above
   "/admin": ["school_admin", "platform_admin"],
