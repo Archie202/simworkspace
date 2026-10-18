@@ -23,6 +23,8 @@ const ROUTE_ACCESS: Record<string, string[]> = {
   "/hr/job-postings": ["hr", "manager", "trainer", "school_admin", "platform_admin"],
   "/hr/screening": ["hr", "manager", "trainer", "school_admin", "platform_admin"],
   "/hr/interviews": ["hr", "manager", "trainer", "school_admin", "platform_admin"],
+  "/hr/offers": ["hr", "manager", "trainer", "school_admin", "platform_admin"],
+  "/offer": ["intern", "hr", "manager", "trainer", "school_admin", "platform_admin"],
   "/attendance": ["hr", "manager", "trainer", "school_admin", "platform_admin"],
 
   // Manager and above

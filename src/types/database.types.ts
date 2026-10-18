@@ -449,6 +449,38 @@ isOneToOne: false
       referencedColumns: ["id"]
     }
                   ]
+                },"offers": {
+                  Row: {
+                    "application_id": string,"id": string,"offered_at": string,"offered_by": string,"organization_id": string,"responded_at": string | null,"response": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "application_id": string,"id"?: string,"offered_at"?: string,"offered_by": string,"organization_id": string,"responded_at"?: string | null,"response"?: string
+                  }
+                  Update: {
+                    "application_id"?: string,"id"?: string,"offered_at"?: string,"offered_by"?: string,"organization_id"?: string,"responded_at"?: string | null,"response"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "offers_application_id_fkey"
+      columns: ["application_id"]
+isOneToOne: true
+      referencedRelation: "applications"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "offers_offered_by_fkey"
+      columns: ["offered_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "offers_organization_id_fkey"
+      columns: ["organization_id"]
+isOneToOne: false
+      referencedRelation: "organizations"
+      referencedColumns: ["id"]
+    }
+                  ]
                 },"organizations": {
                   Row: {
                     "created_at": string,"id": string,"logo_path": string | null,"name": string,"slug": string
