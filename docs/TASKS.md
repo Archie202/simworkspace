@@ -86,11 +86,11 @@ Every task also meets the global rules in `AGENTS.md` (security, under-18, low-d
 
 ### T08 Sign-in and sessions
 **Depends on:** T07
-**Do:** Implement email and password sign-in with Supabase Auth, sign-out, password reset, and session handling in server components. Sign-up is by invitation only. Build the login screen from the wireframe.
+**Do:** Implement email and password sign-in with Supabase Auth, sign-out, password reset, and session handling in server components. Public sign-up is available with role selection (intern, trainer, school admin). New accounts are created inactive until email verification and role assignment. Build the login and signup screens from the wireframe.
 **Done when:**
 - [ ] A seeded user can sign in and out
+- [ ] A new user can sign up with role selection and is created inactive
 - [ ] Unauthenticated users are redirected to login from every protected route
-- [ ] There is no public sign-up page
 - [ ] The login screen shows the under-18 consent note
 - [ ] A user whose status is not `active` sees a clear message and cannot enter
 

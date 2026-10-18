@@ -6,6 +6,7 @@ import { NextResponse, type NextRequest } from "next/server";
 const ROUTE_ACCESS: Record<string, string[]> = {
   // Public routes - no auth required
   "/login": [],
+  "/signup": [],
   "/auth": [],
 
   // All authenticated users
@@ -129,15 +130,16 @@ export async function middleware(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname;
   const isLoginPage = pathname === "/login";
+  const isSignupPage = pathname === "/signup";
   const isAuthPage = pathname.startsWith("/auth");
 
-  // Redirect unauthenticated users to login (unless on login/auth page)
-  if (!session && !isLoginPage && !isAuthPage) {
+  // Redirect unauthenticated users to login (unless on login/signup/auth page)
+  if (!session && !isLoginPage && !isSignupPage && !isAuthPage) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  // Redirect authenticated users away from login
-  if (session && isLoginPage) {
+  // Redirect authenticated users away from login/signup
+  if (session && (isLoginPage || isSignupPage)) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
@@ -151,7 +153,21 @@ export async function middleware(request: NextRequest) {
 
     const userRole = userRoles ? getHighestRole(userRoles.map((r) => r.role)) : null;
 
-    if (!routeAllowsRole(pathname, userRole)) {
+    // Users with a profile but no assigned role can access dashboard (pending verification)
+    if (!userRole) {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("id, status")
+        .eq("id", session.user.id)
+        .single();
+
+      if (profile && pathname !== "/dashboard") {
+        return NextResponse.redirect(new URL("/dashboard", request.url));
+      }
+      if (!profile && !routeAllowsRole(pathname, userRole)) {
+        return NextResponse.redirect(new URL("/not-allowed", request.url));
+      }
+    } else if (!routeAllowsRole(pathname, userRole)) {
       return NextResponse.redirect(new URL("/not-allowed", request.url));
     }
   }

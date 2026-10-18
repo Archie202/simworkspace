@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { signIn } from "./actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -62,7 +63,10 @@ export default function LoginPage({ searchParams }: { searchParams: { [key: stri
         </div>
 
         <p className="text-sm text-text-muted text-center">
-          Sign-up is by invitation only. Ask your trainer to create your account.
+          Don&rsquo;t have an account?{" "}
+          <Link href="/signup" className="text-accent hover:underline">
+            Create one
+          </Link>
         </p>
 
         <div className="bg-surface border border-border p-3 rounded-md text-sm">

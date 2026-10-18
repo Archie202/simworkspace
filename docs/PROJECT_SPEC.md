@@ -38,7 +38,7 @@ Full permissions: `docs/ROLES_PERMISSIONS.md`.
 Everything here is required for the pilot.
 
 ### 4.1 Accounts and structure
-- Sign-up by invitation only. Trainers create accounts.
+- Public sign-up with role selection (intern, trainer, school admin). New accounts are created inactive until verified.
 - Organisations, cohorts, companies, and memberships (see schema).
 - Guardian consent for under-18 interns. The account is inactive until consent is recorded and a trainer has verified the guardian.
 

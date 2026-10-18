@@ -38,7 +38,7 @@ The platform admin can do everything and is left out of the tables. Legend: **Ow
 
 | Action | Intern | HR intern | Manager | Trainer | School admin | Employer | Guardian |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Create or deactivate accounts | - | - | - | Cohort | Org | - | - |
+| Create or deactivate accounts | Self (signup) | - | - | Cohort | Org | - | - |
 | Assign roles and functions | - | - | - | Cohort | Org | - | - |
 | Create cohorts and companies | - | - | - | Yes | Org | - | - |
 | Draft or edit job postings | - | Team | Team | Cohort | Org | - | - |
