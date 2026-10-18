@@ -95,7 +95,7 @@ export default async function TrainerConsentPage({
                       </p>
                     </div>
                   </div>
-                  {guardian && guardian.status === "verified" ? (
+                  {guardian && (guardian as { status?: string }).status === "verified" ? (
                     <form
                       action={recordConsent}
                       className="mt-3"

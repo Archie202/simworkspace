@@ -23,7 +23,33 @@ export type Database = {
           }
         },"public": {
           Tables: {
-            "cohort_members": {
+            "audit_log": {
+                  Row: {
+                    "action": string,"actor_id": string | null,"created_at": string,"details": Json | null,"id": number,"organization_id": string | null,"record_id": string | null,"table_name": string | null
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "action": string,"actor_id"?: string | null,"created_at"?: string,"details"?: Json | null,"id"?: number,"organization_id"?: string | null,"record_id"?: string | null,"table_name"?: string | null
+                  }
+                  Update: {
+                    "action"?: string,"actor_id"?: string | null,"created_at"?: string,"details"?: Json | null,"id"?: number,"organization_id"?: string | null,"record_id"?: string | null,"table_name"?: string | null
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "audit_log_actor_id_fkey"
+      columns: ["actor_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "audit_log_organization_id_fkey"
+      columns: ["organization_id"]
+isOneToOne: false
+      referencedRelation: "organizations"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"cohort_members": {
                   Row: {
                     "cohort_id": string,"cohort_role": string,"id": string,"joined_at": string,"organization_id": string,"profile_id": string,"status": string,"track": Database["public"]['Enums']["track"] | null
                   }
@@ -151,6 +177,44 @@ isOneToOne: false
       referencedColumns: ["id"]
     }
                   ]
+                },"consent_records": {
+                  Row: {
+                    "created_at": string,"evidence_path": string | null,"granted": boolean,"granted_at": string | null,"guardian_link_id": string | null,"id": string,"intern_id": string,"kind": Database["public"]['Enums']["consent_kind"],"organization_id": string,"recorded_by": string | null,"revoked_at": string | null,"text_version": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "created_at"?: string,"evidence_path"?: string | null,"granted"?: boolean,"granted_at"?: string | null,"guardian_link_id"?: string | null,"id"?: string,"intern_id": string,"kind": Database["public"]['Enums']["consent_kind"],"organization_id": string,"recorded_by"?: string | null,"revoked_at"?: string | null,"text_version": string
+                  }
+                  Update: {
+                    "created_at"?: string,"evidence_path"?: string | null,"granted"?: boolean,"granted_at"?: string | null,"guardian_link_id"?: string | null,"id"?: string,"intern_id"?: string,"kind"?: Database["public"]['Enums']["consent_kind"],"organization_id"?: string,"recorded_by"?: string | null,"revoked_at"?: string | null,"text_version"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "consent_records_guardian_link_id_fkey"
+      columns: ["guardian_link_id"]
+isOneToOne: false
+      referencedRelation: "guardian_links"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "consent_records_intern_id_fkey"
+      columns: ["intern_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "consent_records_organization_id_fkey"
+      columns: ["organization_id"]
+isOneToOne: false
+      referencedRelation: "organizations"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "consent_records_recorded_by_fkey"
+      columns: ["recorded_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    }
+                  ]
                 },"guardian_links": {
                   Row: {
                     "created_at": string,"guardian_email": string,"guardian_name": string,"guardian_profile_id": string | null,"id": string,"intern_id": string,"organization_id": string,"relationship": string,"status": string,"verified_at": string | null,"verified_by": string | null
@@ -180,6 +244,44 @@ isOneToOne: false
       columns: ["verified_by"]
 isOneToOne: false
       referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"job_postings": {
+                  Row: {
+                    "cohort_id": string,"company_id": string,"created_at": string,"created_by": string,"description": string,"function": Database["public"]['Enums']["company_function"],"id": string,"openings": number,"organization_id": string,"requirements": string | null,"status": Database["public"]['Enums']["posting_status"],"title": string,"track": Database["public"]['Enums']["track"],"updated_at": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "cohort_id": string,"company_id": string,"created_at"?: string,"created_by": string,"description": string,"function": Database["public"]['Enums']["company_function"],"id"?: string,"openings"?: number,"organization_id": string,"requirements"?: string | null,"status"?: Database["public"]['Enums']["posting_status"],"title": string,"track": Database["public"]['Enums']["track"],"updated_at"?: string
+                  }
+                  Update: {
+                    "cohort_id"?: string,"company_id"?: string,"created_at"?: string,"created_by"?: string,"description"?: string,"function"?: Database["public"]['Enums']["company_function"],"id"?: string,"openings"?: number,"organization_id"?: string,"requirements"?: string | null,"status"?: Database["public"]['Enums']["posting_status"],"title"?: string,"track"?: Database["public"]['Enums']["track"],"updated_at"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "job_postings_cohort_id_fkey"
+      columns: ["cohort_id"]
+isOneToOne: false
+      referencedRelation: "cohorts"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "job_postings_company_id_fkey"
+      columns: ["company_id"]
+isOneToOne: false
+      referencedRelation: "companies"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "job_postings_created_by_fkey"
+      columns: ["created_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "job_postings_organization_id_fkey"
+      columns: ["organization_id"]
+isOneToOne: false
+      referencedRelation: "organizations"
       referencedColumns: ["id"]
     }
                   ]
@@ -252,7 +354,7 @@ isOneToOne: false
             [_ in never]: never
           }
           Enums: {
-            "account_status": "invited"|"pending_consent"|"active"|"suspended"|"left","app_role": "platform_admin"|"school_admin"|"trainer"|"employer"|"guardian"|"intern","cohort_status": "draft"|"hiring"|"active"|"completed","company_function": "intern"|"hr"|"manager","track": "software_development"|"data_analytics"|"program_management"|"hr"
+            "account_status": "invited"|"pending_consent"|"active"|"suspended"|"left","app_role": "platform_admin"|"school_admin"|"trainer"|"employer"|"guardian"|"intern","cohort_status": "draft"|"hiring"|"active"|"completed","company_function": "intern"|"hr"|"manager","consent_kind": "guardian_consent"|"code_of_conduct"|"privacy_notice"|"record_sharing","posting_status": "draft"|"open"|"filled"|"closed","track": "software_development"|"data_analytics"|"program_management"|"hr"
           }
           CompositeTypes: {
             [_ in never]: never
@@ -372,7 +474,7 @@ export const Constants = {
           }
         },"public": {
           Enums: {
-            "account_status": ["invited", "pending_consent", "active", "suspended", "left"],"app_role": ["platform_admin", "school_admin", "trainer", "employer", "guardian", "intern"],"cohort_status": ["draft", "hiring", "active", "completed"],"company_function": ["intern", "hr", "manager"],"track": ["software_development", "data_analytics", "program_management", "hr"]
+            "account_status": ["invited", "pending_consent", "active", "suspended", "left"],"app_role": ["platform_admin", "school_admin", "trainer", "employer", "guardian", "intern"],"cohort_status": ["draft", "hiring", "active", "completed"],"company_function": ["intern", "hr", "manager"],"consent_kind": ["guardian_consent", "code_of_conduct", "privacy_notice", "record_sharing"],"posting_status": ["draft", "open", "filled", "closed"],"track": ["software_development", "data_analytics", "program_management", "hr"]
           }
         }
 } as const

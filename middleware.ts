@@ -18,6 +18,7 @@ const ROUTE_ACCESS: Record<string, string[]> = {
 
   // HR and above
   "/hiring": ["hr", "manager", "trainer", "school_admin", "platform_admin"],
+  "/hr/job-postings": ["hr", "manager", "trainer", "school_admin", "platform_admin"],
   "/attendance": ["hr", "manager", "trainer", "school_admin", "platform_admin"],
 
   // Manager and above

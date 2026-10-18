@@ -36,8 +36,10 @@ begin;
 delete from public.company_members;
 delete from public.cohort_members;
 delete from public.user_roles;
-delete from public.cohorts;
 delete from public.companies;
+delete from public.cohorts;
+delete from public.consent_records;
+delete from public.guardian_links;
 delete from public.profiles;
 delete from public.organizations;
 
@@ -249,9 +251,11 @@ drop function if exists private.set_user_context(uuid);
 
 -- Delete in FK dependency order: children before parents
 delete from public.company_members;
-delete from public.cohort_members;
-delete from public.user_roles;
 delete from public.companies;
+delete from public.cohort_members;
 delete from public.cohorts;
+delete from public.consent_records;
+delete from public.guardian_links;
+delete from public.user_roles;
 delete from public.profiles;
 delete from public.organizations;
