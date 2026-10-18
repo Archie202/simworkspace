@@ -17,6 +17,8 @@ const ROUTE_ACCESS: Record<string, string[]> = {
   "/chat": ["intern", "hr", "manager", "trainer", "school_admin", "platform_admin"],
   "/meetings": ["intern", "hr", "manager", "trainer", "school_admin", "platform_admin"],
   "/record": ["intern", "hr", "manager", "trainer", "school_admin", "platform_admin"],
+  "/onboarding": ["intern", "hr", "manager", "trainer", "school_admin", "platform_admin"],
+  "/onboarding/confirm": ["hr", "manager", "trainer", "school_admin", "platform_admin"],
 
   // HR and above
   "/hiring": ["hr", "manager", "trainer", "school_admin", "platform_admin"],

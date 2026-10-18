@@ -481,6 +481,64 @@ isOneToOne: false
       referencedColumns: ["id"]
     }
                   ]
+                },"onboarding_checklist_items": {
+                  Row: {
+                    "created_at": string,"description": string | null,"id": string,"is_confirmation_item": boolean,"order_index": number,"organization_id": string,"role": Database["public"]['Enums']["onboarding_item_role"],"title": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "created_at"?: string,"description"?: string | null,"id"?: string,"is_confirmation_item"?: boolean,"order_index"?: number,"organization_id": string,"role": Database["public"]['Enums']["onboarding_item_role"],"title": string
+                  }
+                  Update: {
+                    "created_at"?: string,"description"?: string | null,"id"?: string,"is_confirmation_item"?: boolean,"order_index"?: number,"organization_id"?: string,"role"?: Database["public"]['Enums']["onboarding_item_role"],"title"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "onboarding_checklist_items_organization_id_fkey"
+      columns: ["organization_id"]
+isOneToOne: false
+      referencedRelation: "organizations"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"onboarding_checklist_progress": {
+                  Row: {
+                    "checklist_item_id": string,"completed_at": string | null,"completed_by": string | null,"created_at": string,"id": string,"is_completed": boolean,"organization_id": string,"profile_id": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "checklist_item_id": string,"completed_at"?: string | null,"completed_by"?: string | null,"created_at"?: string,"id"?: string,"is_completed"?: boolean,"organization_id": string,"profile_id": string
+                  }
+                  Update: {
+                    "checklist_item_id"?: string,"completed_at"?: string | null,"completed_by"?: string | null,"created_at"?: string,"id"?: string,"is_completed"?: boolean,"organization_id"?: string,"profile_id"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "onboarding_checklist_progress_checklist_item_id_fkey"
+      columns: ["checklist_item_id"]
+isOneToOne: false
+      referencedRelation: "onboarding_checklist_items"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "onboarding_checklist_progress_completed_by_fkey"
+      columns: ["completed_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "onboarding_checklist_progress_organization_id_fkey"
+      columns: ["organization_id"]
+isOneToOne: false
+      referencedRelation: "organizations"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "onboarding_checklist_progress_profile_id_fkey"
+      columns: ["profile_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    }
+                  ]
                 },"organizations": {
                   Row: {
                     "created_at": string,"id": string,"logo_path": string | null,"name": string,"slug": string
@@ -550,7 +608,7 @@ isOneToOne: false
             [_ in never]: never
           }
           Enums: {
-            "account_status": "invited"|"pending_consent"|"active"|"suspended"|"left","app_role": "platform_admin"|"school_admin"|"trainer"|"employer"|"guardian"|"intern","application_status": "submitted"|"screening"|"interview"|"offered"|"accepted"|"rejected"|"withdrawn","cohort_status": "draft"|"hiring"|"active"|"completed","company_function": "intern"|"hr"|"manager","consent_kind": "guardian_consent"|"code_of_conduct"|"privacy_notice"|"record_sharing","interview_mode": "chat"|"audio"|"video","interview_status": "scheduled"|"done"|"cancelled"|"no_show","posting_status": "draft"|"open"|"filled"|"closed","track": "software_development"|"data_analytics"|"program_management"|"hr"
+            "account_status": "invited"|"pending_consent"|"active"|"suspended"|"left","app_role": "platform_admin"|"school_admin"|"trainer"|"employer"|"guardian"|"intern","application_status": "submitted"|"screening"|"interview"|"offered"|"accepted"|"rejected"|"withdrawn","cohort_status": "draft"|"hiring"|"active"|"completed","company_function": "intern"|"hr"|"manager","consent_kind": "guardian_consent"|"code_of_conduct"|"privacy_notice"|"record_sharing","interview_mode": "chat"|"audio"|"video","interview_status": "scheduled"|"done"|"cancelled"|"no_show","onboarding_item_role": "intern"|"hr"|"manager"|"trainer","posting_status": "draft"|"open"|"filled"|"closed","track": "software_development"|"data_analytics"|"program_management"|"hr"
           }
           CompositeTypes: {
             [_ in never]: never
@@ -670,7 +728,7 @@ export const Constants = {
           }
         },"public": {
           Enums: {
-            "account_status": ["invited", "pending_consent", "active", "suspended", "left"],"app_role": ["platform_admin", "school_admin", "trainer", "employer", "guardian", "intern"],"application_status": ["submitted", "screening", "interview", "offered", "accepted", "rejected", "withdrawn"],"cohort_status": ["draft", "hiring", "active", "completed"],"company_function": ["intern", "hr", "manager"],"consent_kind": ["guardian_consent", "code_of_conduct", "privacy_notice", "record_sharing"],"interview_mode": ["chat", "audio", "video"],"interview_status": ["scheduled", "done", "cancelled", "no_show"],"posting_status": ["draft", "open", "filled", "closed"],"track": ["software_development", "data_analytics", "program_management", "hr"]
+            "account_status": ["invited", "pending_consent", "active", "suspended", "left"],"app_role": ["platform_admin", "school_admin", "trainer", "employer", "guardian", "intern"],"application_status": ["submitted", "screening", "interview", "offered", "accepted", "rejected", "withdrawn"],"cohort_status": ["draft", "hiring", "active", "completed"],"company_function": ["intern", "hr", "manager"],"consent_kind": ["guardian_consent", "code_of_conduct", "privacy_notice", "record_sharing"],"interview_mode": ["chat", "audio", "video"],"interview_status": ["scheduled", "done", "cancelled", "no_show"],"onboarding_item_role": ["intern", "hr", "manager", "trainer"],"posting_status": ["draft", "open", "filled", "closed"],"track": ["software_development", "data_analytics", "program_management", "hr"]
           }
         }
 } as const

@@ -11,6 +11,7 @@ export interface LeftNavProps {
 
 const internItems = [
   { href: "/dashboard", label: "Dashboard" },
+  { href: "/onboarding", label: "Onboarding" },
   { href: "/jobs", label: "Job board" },
   { href: "/tasks", label: "Tasks" },
   { href: "/chat", label: "Chat" },
