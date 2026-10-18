@@ -23,7 +23,39 @@ export type Database = {
           }
         },"public": {
           Tables: {
-            "applications": {
+            "application_staff_notes": {
+                  Row: {
+                    "application_id": string,"author_id": string,"created_at": string,"id": string,"is_private": boolean,"note": string,"organization_id": string,"score": number | null,"updated_at": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "application_id": string,"author_id": string,"created_at"?: string,"id"?: string,"is_private"?: boolean,"note": string,"organization_id": string,"score"?: number | null,"updated_at"?: string
+                  }
+                  Update: {
+                    "application_id"?: string,"author_id"?: string,"created_at"?: string,"id"?: string,"is_private"?: boolean,"note"?: string,"organization_id"?: string,"score"?: number | null,"updated_at"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "application_staff_notes_application_id_fkey"
+      columns: ["application_id"]
+isOneToOne: false
+      referencedRelation: "applications"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "application_staff_notes_author_id_fkey"
+      columns: ["author_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "application_staff_notes_organization_id_fkey"
+      columns: ["organization_id"]
+isOneToOne: false
+      referencedRelation: "organizations"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"applications": {
                   Row: {
                     "applicant_id": string,"attempt_number": number,"cohort_id": string,"company_id": string,"cover_note": string | null,"created_at": string,"cv_path": string,"decided_at": string | null,"decided_by": string | null,"feedback_to_applicant": string | null,"id": string,"job_posting_id": string,"organization_id": string,"overridden_by": string | null,"override_reason": string | null,"screening_notes": string | null,"screening_score": number | null,"status": Database["public"]['Enums']["application_status"],"updated_at": string
                   }
