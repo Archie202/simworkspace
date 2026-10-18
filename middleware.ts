@@ -25,6 +25,10 @@ const ROUTE_ACCESS: Record<string, string[]> = {
 
   // Trainer and above
   "/trainer": ["trainer", "school_admin", "platform_admin"],
+  "/trainer/dashboard": ["trainer", "school_admin", "platform_admin"],
+  "/trainer/cohorts": ["trainer", "school_admin", "platform_admin"],
+  "/trainer/companies": ["trainer", "school_admin", "platform_admin"],
+  "/trainer/invite": ["trainer", "school_admin", "platform_admin"],
 
   // School admin and above
   "/admin": ["school_admin", "platform_admin"],
