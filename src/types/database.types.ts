@@ -111,6 +111,50 @@ isOneToOne: false
       referencedColumns: ["id"]
     }
                   ]
+                },"attendance": {
+                  Row: {
+                    "absence_reason": string | null,"clock_in_at": string | null,"clock_out_at": string | null,"cohort_id": string,"confirmed_by": string | null,"created_at": string,"edited_at": string | null,"edited_by": string | null,"id": string,"minutes_worked": number | null,"organization_id": string,"profile_id": string,"status": Database["public"]['Enums']["attendance_status"],"updated_at": string,"work_date": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "absence_reason"?: string | null,"clock_in_at"?: string | null,"clock_out_at"?: string | null,"cohort_id": string,"confirmed_by"?: string | null,"created_at"?: string,"edited_at"?: string | null,"edited_by"?: string | null,"id"?: string,"minutes_worked"?: number | null,"organization_id": string,"profile_id": string,"status"?: Database["public"]['Enums']["attendance_status"],"updated_at"?: string,"work_date": string
+                  }
+                  Update: {
+                    "absence_reason"?: string | null,"clock_in_at"?: string | null,"clock_out_at"?: string | null,"cohort_id"?: string,"confirmed_by"?: string | null,"created_at"?: string,"edited_at"?: string | null,"edited_by"?: string | null,"id"?: string,"minutes_worked"?: number | null,"organization_id"?: string,"profile_id"?: string,"status"?: Database["public"]['Enums']["attendance_status"],"updated_at"?: string,"work_date"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "attendance_cohort_id_fkey"
+      columns: ["cohort_id"]
+isOneToOne: false
+      referencedRelation: "cohorts"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "attendance_confirmed_by_fkey"
+      columns: ["confirmed_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "attendance_edited_by_fkey"
+      columns: ["edited_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "attendance_organization_id_fkey"
+      columns: ["organization_id"]
+isOneToOne: false
+      referencedRelation: "organizations"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "attendance_profile_id_fkey"
+      columns: ["profile_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    }
+                  ]
                 },"audit_log": {
                   Row: {
                     "action": string,"actor_id": string | null,"created_at": string,"details": Json | null,"id": number,"organization_id": string | null,"record_id": string | null,"table_name": string | null
@@ -608,7 +652,7 @@ isOneToOne: false
             [_ in never]: never
           }
           Enums: {
-            "account_status": "invited"|"pending_consent"|"active"|"suspended"|"left","app_role": "platform_admin"|"school_admin"|"trainer"|"employer"|"guardian"|"intern","application_status": "submitted"|"screening"|"interview"|"offered"|"accepted"|"rejected"|"withdrawn","cohort_status": "draft"|"hiring"|"active"|"completed","company_function": "intern"|"hr"|"manager","consent_kind": "guardian_consent"|"code_of_conduct"|"privacy_notice"|"record_sharing","interview_mode": "chat"|"audio"|"video","interview_status": "scheduled"|"done"|"cancelled"|"no_show","onboarding_item_role": "intern"|"hr"|"manager"|"trainer","posting_status": "draft"|"open"|"filled"|"closed","track": "software_development"|"data_analytics"|"program_management"|"hr"
+            "account_status": "invited"|"pending_consent"|"active"|"suspended"|"left","app_role": "platform_admin"|"school_admin"|"trainer"|"employer"|"guardian"|"intern","application_status": "submitted"|"screening"|"interview"|"offered"|"accepted"|"rejected"|"withdrawn","attendance_status": "present"|"late"|"absent"|"excused","cohort_status": "draft"|"hiring"|"active"|"completed","company_function": "intern"|"hr"|"manager","consent_kind": "guardian_consent"|"code_of_conduct"|"privacy_notice"|"record_sharing","interview_mode": "chat"|"audio"|"video","interview_status": "scheduled"|"done"|"cancelled"|"no_show","onboarding_item_role": "intern"|"hr"|"manager"|"trainer","posting_status": "draft"|"open"|"filled"|"closed","track": "software_development"|"data_analytics"|"program_management"|"hr"
           }
           CompositeTypes: {
             [_ in never]: never
@@ -728,7 +772,7 @@ export const Constants = {
           }
         },"public": {
           Enums: {
-            "account_status": ["invited", "pending_consent", "active", "suspended", "left"],"app_role": ["platform_admin", "school_admin", "trainer", "employer", "guardian", "intern"],"application_status": ["submitted", "screening", "interview", "offered", "accepted", "rejected", "withdrawn"],"cohort_status": ["draft", "hiring", "active", "completed"],"company_function": ["intern", "hr", "manager"],"consent_kind": ["guardian_consent", "code_of_conduct", "privacy_notice", "record_sharing"],"interview_mode": ["chat", "audio", "video"],"interview_status": ["scheduled", "done", "cancelled", "no_show"],"onboarding_item_role": ["intern", "hr", "manager", "trainer"],"posting_status": ["draft", "open", "filled", "closed"],"track": ["software_development", "data_analytics", "program_management", "hr"]
+            "account_status": ["invited", "pending_consent", "active", "suspended", "left"],"app_role": ["platform_admin", "school_admin", "trainer", "employer", "guardian", "intern"],"application_status": ["submitted", "screening", "interview", "offered", "accepted", "rejected", "withdrawn"],"attendance_status": ["present", "late", "absent", "excused"],"cohort_status": ["draft", "hiring", "active", "completed"],"company_function": ["intern", "hr", "manager"],"consent_kind": ["guardian_consent", "code_of_conduct", "privacy_notice", "record_sharing"],"interview_mode": ["chat", "audio", "video"],"interview_status": ["scheduled", "done", "cancelled", "no_show"],"onboarding_item_role": ["intern", "hr", "manager", "trainer"],"posting_status": ["draft", "open", "filled", "closed"],"track": ["software_development", "data_analytics", "program_management", "hr"]
           }
         }
 } as const
