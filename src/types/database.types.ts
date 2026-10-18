@@ -643,6 +643,50 @@ isOneToOne: false
       referencedColumns: ["id"]
     }
                   ]
+                },"submissions": {
+                  Row: {
+                    "author_id": string,"cohort_id": string,"company_id": string,"file_paths": (string)[],"id": string,"links": (string)[],"note": string | null,"organization_id": string,"submitted_at": string,"task_id": string,"version": number
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "author_id": string,"cohort_id": string,"company_id": string,"file_paths"?: (string)[],"id"?: string,"links"?: (string)[],"note"?: string | null,"organization_id": string,"submitted_at"?: string,"task_id": string,"version"?: number
+                  }
+                  Update: {
+                    "author_id"?: string,"cohort_id"?: string,"company_id"?: string,"file_paths"?: (string)[],"id"?: string,"links"?: (string)[],"note"?: string | null,"organization_id"?: string,"submitted_at"?: string,"task_id"?: string,"version"?: number
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "submissions_author_id_fkey"
+      columns: ["author_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "submissions_cohort_id_fkey"
+      columns: ["cohort_id"]
+isOneToOne: false
+      referencedRelation: "cohorts"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "submissions_company_id_fkey"
+      columns: ["company_id"]
+isOneToOne: false
+      referencedRelation: "companies"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "submissions_organization_id_fkey"
+      columns: ["organization_id"]
+isOneToOne: false
+      referencedRelation: "organizations"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "submissions_task_id_fkey"
+      columns: ["task_id"]
+isOneToOne: false
+      referencedRelation: "tasks"
+      referencedColumns: ["id"]
+    }
+                  ]
                 },"tasks": {
                   Row: {
                     "assignee_id": string | null,"cohort_id": string,"company_id": string,"created_at": string,"created_by": string,"description": string | null,"due_at": string | null,"id": string,"organization_id": string,"position": number,"priority": Database["public"]['Enums']["priority"],"rubric_id": string | null,"status": Database["public"]['Enums']["task_status"],"template_id": string | null,"title": string,"updated_at": string
