@@ -71,6 +71,12 @@ export default async function TrainerLayout({
             >
               Screening
             </a>
+            <a
+              href="/hr/interviews"
+              className="block min-h-[44px] px-3 py-2 text-sm text-text rounded-md hover:bg-fill hover:text-accent focus-visible:outline-accent focus-visible:outline-2 focus-visible:outline-offset-2"
+            >
+              Interviews
+            </a>
           </nav>
         </aside>
         <main className="flex-1 overflow-y-auto bg-bg p-4">

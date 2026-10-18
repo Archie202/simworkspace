@@ -335,6 +335,82 @@ isOneToOne: false
       referencedColumns: ["id"]
     }
                   ]
+                },"interview_staff_notes": {
+                  Row: {
+                    "author_id": string,"created_at": string,"id": string,"interview_id": string,"is_private": boolean,"note": string,"organization_id": string,"updated_at": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "author_id": string,"created_at"?: string,"id"?: string,"interview_id": string,"is_private"?: boolean,"note": string,"organization_id": string,"updated_at"?: string
+                  }
+                  Update: {
+                    "author_id"?: string,"created_at"?: string,"id"?: string,"interview_id"?: string,"is_private"?: boolean,"note"?: string,"organization_id"?: string,"updated_at"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "interview_staff_notes_author_id_fkey"
+      columns: ["author_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "interview_staff_notes_interview_id_fkey"
+      columns: ["interview_id"]
+isOneToOne: false
+      referencedRelation: "interviews"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "interview_staff_notes_organization_id_fkey"
+      columns: ["organization_id"]
+isOneToOne: false
+      referencedRelation: "organizations"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"interviews": {
+                  Row: {
+                    "application_id": string,"cohort_id": string,"created_at": string,"duration_minutes": number,"feedback_to_applicant": string | null,"id": string,"interviewer_id": string,"meeting_url": string | null,"mode": Database["public"]['Enums']["interview_mode"],"organization_id": string,"private_notes": string | null,"rubric_id": string | null,"scheduled_at": string,"scores": Json | null,"second_adult_id": string | null,"status": Database["public"]['Enums']["interview_status"],"total_score": number | null
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "application_id": string,"cohort_id": string,"created_at"?: string,"duration_minutes"?: number,"feedback_to_applicant"?: string | null,"id"?: string,"interviewer_id": string,"meeting_url"?: string | null,"mode": Database["public"]['Enums']["interview_mode"],"organization_id": string,"private_notes"?: string | null,"rubric_id"?: string | null,"scheduled_at": string,"scores"?: Json | null,"second_adult_id"?: string | null,"status"?: Database["public"]['Enums']["interview_status"],"total_score"?: number | null
+                  }
+                  Update: {
+                    "application_id"?: string,"cohort_id"?: string,"created_at"?: string,"duration_minutes"?: number,"feedback_to_applicant"?: string | null,"id"?: string,"interviewer_id"?: string,"meeting_url"?: string | null,"mode"?: Database["public"]['Enums']["interview_mode"],"organization_id"?: string,"private_notes"?: string | null,"rubric_id"?: string | null,"scheduled_at"?: string,"scores"?: Json | null,"second_adult_id"?: string | null,"status"?: Database["public"]['Enums']["interview_status"],"total_score"?: number | null
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "interviews_application_id_fkey"
+      columns: ["application_id"]
+isOneToOne: false
+      referencedRelation: "applications"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "interviews_cohort_id_fkey"
+      columns: ["cohort_id"]
+isOneToOne: false
+      referencedRelation: "cohorts"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "interviews_interviewer_id_fkey"
+      columns: ["interviewer_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "interviews_organization_id_fkey"
+      columns: ["organization_id"]
+isOneToOne: false
+      referencedRelation: "organizations"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "interviews_second_adult_id_fkey"
+      columns: ["second_adult_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    }
+                  ]
                 },"job_postings": {
                   Row: {
                     "cohort_id": string,"company_id": string,"created_at": string,"created_by": string,"description": string,"function": Database["public"]['Enums']["company_function"],"id": string,"openings": number,"organization_id": string,"requirements": string | null,"status": Database["public"]['Enums']["posting_status"],"title": string,"track": Database["public"]['Enums']["track"],"updated_at": string
@@ -442,7 +518,7 @@ isOneToOne: false
             [_ in never]: never
           }
           Enums: {
-            "account_status": "invited"|"pending_consent"|"active"|"suspended"|"left","app_role": "platform_admin"|"school_admin"|"trainer"|"employer"|"guardian"|"intern","application_status": "submitted"|"screening"|"interview"|"offered"|"accepted"|"rejected"|"withdrawn","cohort_status": "draft"|"hiring"|"active"|"completed","company_function": "intern"|"hr"|"manager","consent_kind": "guardian_consent"|"code_of_conduct"|"privacy_notice"|"record_sharing","posting_status": "draft"|"open"|"filled"|"closed","track": "software_development"|"data_analytics"|"program_management"|"hr"
+            "account_status": "invited"|"pending_consent"|"active"|"suspended"|"left","app_role": "platform_admin"|"school_admin"|"trainer"|"employer"|"guardian"|"intern","application_status": "submitted"|"screening"|"interview"|"offered"|"accepted"|"rejected"|"withdrawn","cohort_status": "draft"|"hiring"|"active"|"completed","company_function": "intern"|"hr"|"manager","consent_kind": "guardian_consent"|"code_of_conduct"|"privacy_notice"|"record_sharing","interview_mode": "chat"|"audio"|"video","interview_status": "scheduled"|"done"|"cancelled"|"no_show","posting_status": "draft"|"open"|"filled"|"closed","track": "software_development"|"data_analytics"|"program_management"|"hr"
           }
           CompositeTypes: {
             [_ in never]: never
@@ -562,7 +638,7 @@ export const Constants = {
           }
         },"public": {
           Enums: {
-            "account_status": ["invited", "pending_consent", "active", "suspended", "left"],"app_role": ["platform_admin", "school_admin", "trainer", "employer", "guardian", "intern"],"application_status": ["submitted", "screening", "interview", "offered", "accepted", "rejected", "withdrawn"],"cohort_status": ["draft", "hiring", "active", "completed"],"company_function": ["intern", "hr", "manager"],"consent_kind": ["guardian_consent", "code_of_conduct", "privacy_notice", "record_sharing"],"posting_status": ["draft", "open", "filled", "closed"],"track": ["software_development", "data_analytics", "program_management", "hr"]
+            "account_status": ["invited", "pending_consent", "active", "suspended", "left"],"app_role": ["platform_admin", "school_admin", "trainer", "employer", "guardian", "intern"],"application_status": ["submitted", "screening", "interview", "offered", "accepted", "rejected", "withdrawn"],"cohort_status": ["draft", "hiring", "active", "completed"],"company_function": ["intern", "hr", "manager"],"consent_kind": ["guardian_consent", "code_of_conduct", "privacy_notice", "record_sharing"],"interview_mode": ["chat", "audio", "video"],"interview_status": ["scheduled", "done", "cancelled", "no_show"],"posting_status": ["draft", "open", "filled", "closed"],"track": ["software_development", "data_analytics", "program_management", "hr"]
           }
         }
 } as const
