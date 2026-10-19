@@ -563,6 +563,76 @@ isOneToOne: false
       referencedColumns: ["id"]
     }
                   ]
+                },"meeting_attendees": {
+                  Row: {
+                    "attended": boolean | null,"id": string,"meeting_id": string,"organization_id": string,"profile_id": string,"rsvp": string | null
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "attended"?: boolean | null,"id"?: string,"meeting_id": string,"organization_id": string,"profile_id": string,"rsvp"?: string | null
+                  }
+                  Update: {
+                    "attended"?: boolean | null,"id"?: string,"meeting_id"?: string,"organization_id"?: string,"profile_id"?: string,"rsvp"?: string | null
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "meeting_attendees_meeting_id_fkey"
+      columns: ["meeting_id"]
+isOneToOne: false
+      referencedRelation: "meetings"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "meeting_attendees_organization_id_fkey"
+      columns: ["organization_id"]
+isOneToOne: false
+      referencedRelation: "organizations"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "meeting_attendees_profile_id_fkey"
+      columns: ["profile_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"meetings": {
+                  Row: {
+                    "cohort_id": string,"company_id": string | null,"created_at": string,"created_by": string,"duration_minutes": number,"id": string,"kind": Database["public"]['Enums']["meeting_kind"],"meeting_url": string,"organization_id": string,"starts_at": string,"title": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "cohort_id": string,"company_id"?: string | null,"created_at"?: string,"created_by": string,"duration_minutes"?: number,"id"?: string,"kind": Database["public"]['Enums']["meeting_kind"],"meeting_url": string,"organization_id": string,"starts_at": string,"title": string
+                  }
+                  Update: {
+                    "cohort_id"?: string,"company_id"?: string | null,"created_at"?: string,"created_by"?: string,"duration_minutes"?: number,"id"?: string,"kind"?: Database["public"]['Enums']["meeting_kind"],"meeting_url"?: string,"organization_id"?: string,"starts_at"?: string,"title"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "meetings_cohort_id_fkey"
+      columns: ["cohort_id"]
+isOneToOne: false
+      referencedRelation: "cohorts"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "meetings_company_id_fkey"
+      columns: ["company_id"]
+isOneToOne: false
+      referencedRelation: "companies"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "meetings_created_by_fkey"
+      columns: ["created_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "meetings_organization_id_fkey"
+      columns: ["organization_id"]
+isOneToOne: false
+      referencedRelation: "organizations"
+      referencedColumns: ["id"]
+    }
+                  ]
                 },"messages": {
                   Row: {
                     "attachment_paths": (string)[],"body": string,"channel_id": string,"cohort_id": string,"created_at": string,"deleted_at": string | null,"deleted_by": string | null,"edited_at": string | null,"flagged": boolean,"id": string,"organization_id": string,"reply_to_id": string | null,"sender_id": string
@@ -988,7 +1058,7 @@ isOneToOne: false
             [_ in never]: never
           }
           Enums: {
-            "account_status": "invited"|"pending_consent"|"active"|"suspended"|"left","app_role": "platform_admin"|"school_admin"|"trainer"|"employer"|"guardian"|"intern","application_status": "submitted"|"screening"|"interview"|"offered"|"accepted"|"rejected"|"withdrawn","attendance_status": "present"|"late"|"absent"|"excused","channel_kind": "company"|"team"|"announcement"|"group"|"direct","cohort_status": "draft"|"hiring"|"active"|"completed","company_function": "intern"|"hr"|"manager","consent_kind": "guardian_consent"|"code_of_conduct"|"privacy_notice"|"record_sharing","interview_mode": "chat"|"audio"|"video","interview_status": "scheduled"|"done"|"cancelled"|"no_show","onboarding_item_role": "intern"|"hr"|"manager"|"trainer","posting_status": "draft"|"open"|"filled"|"closed","priority": "low"|"medium"|"high","review_outcome": "approved"|"changes_requested"|"rejected","task_status": "todo"|"in_progress"|"in_review"|"changes_requested"|"done","track": "software_development"|"data_analytics"|"program_management"|"hr"
+            "account_status": "invited"|"pending_consent"|"active"|"suspended"|"left","app_role": "platform_admin"|"school_admin"|"trainer"|"employer"|"guardian"|"intern","application_status": "submitted"|"screening"|"interview"|"offered"|"accepted"|"rejected"|"withdrawn","attendance_status": "present"|"late"|"absent"|"excused","channel_kind": "company"|"team"|"announcement"|"group"|"direct","cohort_status": "draft"|"hiring"|"active"|"completed","company_function": "intern"|"hr"|"manager","consent_kind": "guardian_consent"|"code_of_conduct"|"privacy_notice"|"record_sharing","interview_mode": "chat"|"audio"|"video","interview_status": "scheduled"|"done"|"cancelled"|"no_show","meeting_kind": "standup"|"interview"|"one_to_one"|"workshop","onboarding_item_role": "intern"|"hr"|"manager"|"trainer","posting_status": "draft"|"open"|"filled"|"closed","priority": "low"|"medium"|"high","review_outcome": "approved"|"changes_requested"|"rejected","task_status": "todo"|"in_progress"|"in_review"|"changes_requested"|"done","track": "software_development"|"data_analytics"|"program_management"|"hr"
           }
           CompositeTypes: {
             [_ in never]: never
@@ -1108,7 +1178,7 @@ export const Constants = {
           }
         },"public": {
           Enums: {
-            "account_status": ["invited", "pending_consent", "active", "suspended", "left"],"app_role": ["platform_admin", "school_admin", "trainer", "employer", "guardian", "intern"],"application_status": ["submitted", "screening", "interview", "offered", "accepted", "rejected", "withdrawn"],"attendance_status": ["present", "late", "absent", "excused"],"channel_kind": ["company", "team", "announcement", "group", "direct"],"cohort_status": ["draft", "hiring", "active", "completed"],"company_function": ["intern", "hr", "manager"],"consent_kind": ["guardian_consent", "code_of_conduct", "privacy_notice", "record_sharing"],"interview_mode": ["chat", "audio", "video"],"interview_status": ["scheduled", "done", "cancelled", "no_show"],"onboarding_item_role": ["intern", "hr", "manager", "trainer"],"posting_status": ["draft", "open", "filled", "closed"],"priority": ["low", "medium", "high"],"review_outcome": ["approved", "changes_requested", "rejected"],"task_status": ["todo", "in_progress", "in_review", "changes_requested", "done"],"track": ["software_development", "data_analytics", "program_management", "hr"]
+            "account_status": ["invited", "pending_consent", "active", "suspended", "left"],"app_role": ["platform_admin", "school_admin", "trainer", "employer", "guardian", "intern"],"application_status": ["submitted", "screening", "interview", "offered", "accepted", "rejected", "withdrawn"],"attendance_status": ["present", "late", "absent", "excused"],"channel_kind": ["company", "team", "announcement", "group", "direct"],"cohort_status": ["draft", "hiring", "active", "completed"],"company_function": ["intern", "hr", "manager"],"consent_kind": ["guardian_consent", "code_of_conduct", "privacy_notice", "record_sharing"],"interview_mode": ["chat", "audio", "video"],"interview_status": ["scheduled", "done", "cancelled", "no_show"],"meeting_kind": ["standup", "interview", "one_to_one", "workshop"],"onboarding_item_role": ["intern", "hr", "manager", "trainer"],"posting_status": ["draft", "open", "filled", "closed"],"priority": ["low", "medium", "high"],"review_outcome": ["approved", "changes_requested", "rejected"],"task_status": ["todo", "in_progress", "in_review", "changes_requested", "done"],"track": ["software_development", "data_analytics", "program_management", "hr"]
           }
         }
 } as const
