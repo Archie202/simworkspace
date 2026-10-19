@@ -33,6 +33,8 @@ const trainerItems = [
   { href: "/trainer/cohorts", label: "Cohorts" },
   { href: "/trainer/companies", label: "Companies" },
   { href: "/trainer/users", label: "Users" },
+  { href: "/rubrics", label: "Rubrics" },
+  { href: "/tasks/library", label: "Task Library" },
 ];
 
 const schoolAdminItems = [

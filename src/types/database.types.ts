@@ -687,6 +687,32 @@ isOneToOne: false
       referencedColumns: ["id"]
     }
                   ]
+                },"rubrics": {
+                  Row: {
+                    "created_at": string,"created_by": string,"criteria": NonNullable<Json>,"id": string,"kind": string,"name": string,"organization_id": string,"updated_at": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "created_at"?: string,"created_by": string,"criteria"?: NonNullable<Json>,"id"?: string,"kind": string,"name": string,"organization_id": string,"updated_at"?: string
+                  }
+                  Update: {
+                    "created_at"?: string,"created_by"?: string,"criteria"?: NonNullable<Json>,"id"?: string,"kind"?: string,"name"?: string,"organization_id"?: string,"updated_at"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "rubrics_created_by_fkey"
+      columns: ["created_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "rubrics_organization_id_fkey"
+      columns: ["organization_id"]
+isOneToOne: false
+      referencedRelation: "organizations"
+      referencedColumns: ["id"]
+    }
+                  ]
                 },"submissions": {
                   Row: {
                     "author_id": string,"cohort_id": string,"company_id": string,"file_paths": (string)[],"id": string,"links": (string)[],"note": string | null,"organization_id": string,"submitted_at": string,"task_id": string,"version": number
@@ -728,6 +754,38 @@ isOneToOne: false
       columns: ["task_id"]
 isOneToOne: false
       referencedRelation: "tasks"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"task_templates": {
+                  Row: {
+                    "created_at": string,"created_by": string,"description": string | null,"difficulty": number,"estimated_minutes": number | null,"id": string,"organization_id": string,"rubric_id": string | null,"source": string,"title": string,"track": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "created_at"?: string,"created_by": string,"description"?: string | null,"difficulty"?: number,"estimated_minutes"?: number | null,"id"?: string,"organization_id": string,"rubric_id"?: string | null,"source"?: string,"title": string,"track": string
+                  }
+                  Update: {
+                    "created_at"?: string,"created_by"?: string,"description"?: string | null,"difficulty"?: number,"estimated_minutes"?: number | null,"id"?: string,"organization_id"?: string,"rubric_id"?: string | null,"source"?: string,"title"?: string,"track"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "task_templates_created_by_fkey"
+      columns: ["created_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "task_templates_organization_id_fkey"
+      columns: ["organization_id"]
+isOneToOne: false
+      referencedRelation: "organizations"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "task_templates_rubric_id_fkey"
+      columns: ["rubric_id"]
+isOneToOne: false
+      referencedRelation: "rubrics"
       referencedColumns: ["id"]
     }
                   ]

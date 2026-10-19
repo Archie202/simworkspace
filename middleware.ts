@@ -30,6 +30,8 @@ const ROUTE_ACCESS: Record<string, string[]> = {
   "/hr/interviews": ["hr", "manager", "trainer", "school_admin", "platform_admin"],
   "/hr/offers": ["hr", "manager", "trainer", "school_admin", "platform_admin"],
   "/hr/override": ["trainer", "school_admin", "platform_admin"],
+  "/rubrics": ["trainer", "school_admin", "platform_admin"],
+  "/tasks/library": ["trainer", "school_admin", "platform_admin"],
   "/offer": ["intern", "hr", "manager", "trainer", "school_admin", "platform_admin"],
   "/attendance": ["hr", "manager", "trainer", "school_admin", "platform_admin"],
 
