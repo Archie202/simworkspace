@@ -52,7 +52,7 @@ export default async function ChatPage({
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("id, display_name")
+    .select("id, display_name, organization_id")
     .eq("id", user.id)
     .single();
 
@@ -128,6 +128,17 @@ export default async function ChatPage({
                 {ch.name}
               </div>
             ))}
+            <div className="mt-4 pt-3 border-t border-border">
+              <Button
+                size="sm"
+                onClick={() => {
+                  // Open direct message creation (handled via form below)
+                }}
+                className="w-full text-sm"
+              >
+                Start Direct Message
+              </Button>
+            </div>
           </div>
         </div>
 
