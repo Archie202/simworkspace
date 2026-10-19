@@ -33,6 +33,7 @@ const ROUTE_ACCESS: Record<string, string[]> = {
   "/rubrics": ["trainer", "school_admin", "platform_admin"],
   "/tasks/library": ["trainer", "school_admin", "platform_admin"],
   "/offer": ["intern", "hr", "manager", "trainer", "school_admin", "platform_admin"],
+  "/notifications": ["intern", "hr", "manager", "trainer", "school_admin", "platform_admin"],
   "/attendance": ["hr", "manager", "trainer", "school_admin", "platform_admin"],
 
   // Manager and above
