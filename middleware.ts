@@ -16,6 +16,7 @@ const ROUTE_ACCESS: Record<string, string[]> = {
   "/tasks": ["intern", "hr", "manager", "trainer", "school_admin", "platform_admin"],
   "/tasks/[taskId]": ["intern", "hr", "manager", "trainer", "school_admin", "platform_admin"],
   "/tasks/[taskId]/submit": ["intern", "hr", "manager", "trainer", "school_admin", "platform_admin"],
+  "/tasks/[taskId]/review": ["hr", "manager", "trainer", "school_admin", "platform_admin"],
   "/chat": ["intern", "hr", "manager", "trainer", "school_admin", "platform_admin"],
   "/meetings": ["intern", "hr", "manager", "trainer", "school_admin", "platform_admin"],
   "/record": ["intern", "hr", "manager", "trainer", "school_admin", "platform_admin"],

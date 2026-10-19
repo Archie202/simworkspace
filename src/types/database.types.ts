@@ -643,6 +643,50 @@ isOneToOne: false
       referencedColumns: ["id"]
     }
                   ]
+                },"reviews": {
+                  Row: {
+                    "cohort_id": string,"comments": string | null,"company_id": string,"created_at": string,"dispute_note": string | null,"disputed": boolean,"id": string,"organization_id": string,"outcome": Database["public"]['Enums']["review_outcome"],"reviewer_id": string,"rubric_scores": Json | null,"score": number | null,"submission_id": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "cohort_id": string,"comments"?: string | null,"company_id": string,"created_at"?: string,"dispute_note"?: string | null,"disputed"?: boolean,"id"?: string,"organization_id": string,"outcome": Database["public"]['Enums']["review_outcome"],"reviewer_id": string,"rubric_scores"?: Json | null,"score"?: number | null,"submission_id": string
+                  }
+                  Update: {
+                    "cohort_id"?: string,"comments"?: string | null,"company_id"?: string,"created_at"?: string,"dispute_note"?: string | null,"disputed"?: boolean,"id"?: string,"organization_id"?: string,"outcome"?: Database["public"]['Enums']["review_outcome"],"reviewer_id"?: string,"rubric_scores"?: Json | null,"score"?: number | null,"submission_id"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "reviews_cohort_id_fkey"
+      columns: ["cohort_id"]
+isOneToOne: false
+      referencedRelation: "cohorts"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "reviews_company_id_fkey"
+      columns: ["company_id"]
+isOneToOne: false
+      referencedRelation: "companies"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "reviews_organization_id_fkey"
+      columns: ["organization_id"]
+isOneToOne: false
+      referencedRelation: "organizations"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "reviews_reviewer_id_fkey"
+      columns: ["reviewer_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "reviews_submission_id_fkey"
+      columns: ["submission_id"]
+isOneToOne: false
+      referencedRelation: "submissions"
+      referencedColumns: ["id"]
+    }
+                  ]
                 },"submissions": {
                   Row: {
                     "author_id": string,"cohort_id": string,"company_id": string,"file_paths": (string)[],"id": string,"links": (string)[],"note": string | null,"organization_id": string,"submitted_at": string,"task_id": string,"version": number
@@ -766,7 +810,7 @@ isOneToOne: false
             [_ in never]: never
           }
           Enums: {
-            "account_status": "invited"|"pending_consent"|"active"|"suspended"|"left","app_role": "platform_admin"|"school_admin"|"trainer"|"employer"|"guardian"|"intern","application_status": "submitted"|"screening"|"interview"|"offered"|"accepted"|"rejected"|"withdrawn","attendance_status": "present"|"late"|"absent"|"excused","cohort_status": "draft"|"hiring"|"active"|"completed","company_function": "intern"|"hr"|"manager","consent_kind": "guardian_consent"|"code_of_conduct"|"privacy_notice"|"record_sharing","interview_mode": "chat"|"audio"|"video","interview_status": "scheduled"|"done"|"cancelled"|"no_show","onboarding_item_role": "intern"|"hr"|"manager"|"trainer","posting_status": "draft"|"open"|"filled"|"closed","priority": "low"|"medium"|"high","task_status": "todo"|"in_progress"|"in_review"|"changes_requested"|"done","track": "software_development"|"data_analytics"|"program_management"|"hr"
+            "account_status": "invited"|"pending_consent"|"active"|"suspended"|"left","app_role": "platform_admin"|"school_admin"|"trainer"|"employer"|"guardian"|"intern","application_status": "submitted"|"screening"|"interview"|"offered"|"accepted"|"rejected"|"withdrawn","attendance_status": "present"|"late"|"absent"|"excused","cohort_status": "draft"|"hiring"|"active"|"completed","company_function": "intern"|"hr"|"manager","consent_kind": "guardian_consent"|"code_of_conduct"|"privacy_notice"|"record_sharing","interview_mode": "chat"|"audio"|"video","interview_status": "scheduled"|"done"|"cancelled"|"no_show","onboarding_item_role": "intern"|"hr"|"manager"|"trainer","posting_status": "draft"|"open"|"filled"|"closed","priority": "low"|"medium"|"high","review_outcome": "approved"|"changes_requested"|"rejected","task_status": "todo"|"in_progress"|"in_review"|"changes_requested"|"done","track": "software_development"|"data_analytics"|"program_management"|"hr"
           }
           CompositeTypes: {
             [_ in never]: never
@@ -886,7 +930,7 @@ export const Constants = {
           }
         },"public": {
           Enums: {
-            "account_status": ["invited", "pending_consent", "active", "suspended", "left"],"app_role": ["platform_admin", "school_admin", "trainer", "employer", "guardian", "intern"],"application_status": ["submitted", "screening", "interview", "offered", "accepted", "rejected", "withdrawn"],"attendance_status": ["present", "late", "absent", "excused"],"cohort_status": ["draft", "hiring", "active", "completed"],"company_function": ["intern", "hr", "manager"],"consent_kind": ["guardian_consent", "code_of_conduct", "privacy_notice", "record_sharing"],"interview_mode": ["chat", "audio", "video"],"interview_status": ["scheduled", "done", "cancelled", "no_show"],"onboarding_item_role": ["intern", "hr", "manager", "trainer"],"posting_status": ["draft", "open", "filled", "closed"],"priority": ["low", "medium", "high"],"task_status": ["todo", "in_progress", "in_review", "changes_requested", "done"],"track": ["software_development", "data_analytics", "program_management", "hr"]
+            "account_status": ["invited", "pending_consent", "active", "suspended", "left"],"app_role": ["platform_admin", "school_admin", "trainer", "employer", "guardian", "intern"],"application_status": ["submitted", "screening", "interview", "offered", "accepted", "rejected", "withdrawn"],"attendance_status": ["present", "late", "absent", "excused"],"cohort_status": ["draft", "hiring", "active", "completed"],"company_function": ["intern", "hr", "manager"],"consent_kind": ["guardian_consent", "code_of_conduct", "privacy_notice", "record_sharing"],"interview_mode": ["chat", "audio", "video"],"interview_status": ["scheduled", "done", "cancelled", "no_show"],"onboarding_item_role": ["intern", "hr", "manager", "trainer"],"posting_status": ["draft", "open", "filled", "closed"],"priority": ["low", "medium", "high"],"review_outcome": ["approved", "changes_requested", "rejected"],"task_status": ["todo", "in_progress", "in_review", "changes_requested", "done"],"track": ["software_development", "data_analytics", "program_management", "hr"]
           }
         }
 } as const
